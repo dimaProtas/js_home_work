@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Homework</title>
+</head>
+<body>
+<!--
+Необязательное задание, но желательно сделать.
+
+Необходимо данное задание выполнить в es5 стиле и в es6 стиле.
+Необходимо создать функцию-конструктор/класс для поста в социальной сети.
+Названия: `PostES5` для es5 стиля и `PostES6` для es6 стиля.
+Пост должен хранить:
+1. Автора поста (имени достаточно).
+2. Текст поста.
+3. Дату и время последнего изменения поста.
+Данные автора поста и текст поста необходимо передавать при создании
+экземпляра объекта.
+Каждому экземпляру объекта должен быть доступен метод `edit`, который будет
+менять текст поста.
+
+---
+
+Необходимо создать функцию-конструктор/класс для закрепленного поста в
+социальной сети.
+Названия: `AttachedPostES5` для es5 стиля и `AttachedPostES6` для es6 стиля.
+Закрепленный пост должен наследоваться от обычного поста.
+Данные автора поста и текст поста необходимо передавать при создании
+экземпляра объекта.
+Закрепленный пост должен иметь свойство `highlighted`, в котором по умолчанию
+будет лежать значение false (это свойство будет обозначать, будет ли наш
+закрепленный пост подсвечен).
+У экземпляров объекта закрепленного поста должен быть метод с названием
+`makeTextHighlighted`, который сделает так, чтобы наш пост стал подсвеченным
+(будет менять свойство `highlighted`).
+
+---
+
+Подсказки:
+1. Задание сложное, советую делать по аналогии с примером на онлайн-занятии.
+2. Обратите внимание что пост хранит "дату и время последнего изменения
+поста", это значит что если пост кто-то изменит (например вызовет какой-то
+метод, который изменит что-то в посте), дата и время последнего изменения
+поста также должна измениться.
+3. Выполняйте все по порядку, не стоит пытаться сделать все сразу, иначе можно
+что-нибудь пропустить.
+4. Если непонятно условие - задайте вопрос.
+-->
+<script>
+  "use strict";
+
+  function PostES5 (name_user, text, change_date_time) {
+    this.name_user = name_user;
+    this.text = text;
+    this.change_date_time = new Date().toLocaleString();
+  }
+
+  PostES5.prototype.edit = function() {
+    this.change_date_time = new Date().toLocaleString();
+    console.log(`В пост пользователя ${this.name_user}, было добавлено ${'стандартное сообщение'}, дата и время изменения ${this.change_date_time}`)
+    console.log(this.text += '\nСтандартное сообщение')
+  }
+
+  function AttachedPostES5 (name_user, text, change_date_time, highlighted) {
+    PostES5.call(this, name_user, text, change_date_time);
+    this.highlighted = false;
+  }
+
+  AttachedPostES5.prototype.makeTextHighlighted = function() {
+    this.highlighted = true;
+    console.log(`Пост пользователя ${this.name_user} закреплен! Дата и время изменения ${this.change_date_time}.`);
+  }
+
+
+  const post_3 = new AttachedPostES5('Иван', 'как дела?');
+  console.log(post_3);
+  console.log(post_3.makeTextHighlighted());
+
+
+
+  const post_1 = new PostES5('Дима', 'текст');
+
+  console.log(post_1.edit())
+
+
+class PostES6 {
+  constructor(name_user, text, change_date_time) {
+    this.name_user = name_user;
+    this.text = text;
+    this.change_date_time = new Date().toLocaleString();
+  }
+
+  edit() {
+    this.change_date_time = new Date().toLocaleString();
+    console.log(`В пост пользователя ${this.name_user}, было добавлено ${'стандартное сообщение'}, дата и время изменения ${this.change_date_time}`)
+    console.log(this.text += '\nСтандартное сообщение')
+  }
+}
+
+class AttachedPostES6 extends PostES6 {
+  constructor(name_user, text, change_date_time, highlighted){
+    super(name_user, text, change_date_time);
+    this.highlighted = highlighted;
+  }
+
+  makeTextHighlighted() {
+    this.highlighted = true;
+    console.log(`Пост пользователя ${this.name_user} закреплен! Дата и время изменения ${this.change_date_time}.`);
+  }
+}
+
+
+const post_4 = new AttachedPostES6('Василий', 'у меня все отлично!');
+console.log(post_4);
+console.log(post_4.makeTextHighlighted());
+console.log(post_4.edit());
+
+const post_2 = new PostES6('Паша', 'привет мир');
+
+console.log(post_2.edit())
+</script>
+</body>
+</html>
