@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Homework</title>
+</head>
+<body>
+<!--
+Обязательное задание.
+
+Необходимо данное задание выполнить в es5 стиле и в es6 стиле.
+Необходимо создать функцию-конструктор/класс для продукта.
+Названия: `ProductES5` для es5 стиля, `ProductES6` для es6 стиля.
+При создании объекта от функции-конструктора/класса необходимо передавать имя
+и цену товара, эта информация должна быть сохранена в объекте.
+Также у объекта должна быть возможность выполнить метод `make25Discount`, данный
+метод должен уменьшать стоимость продукта на 25%.
+Необходимо продемонстрировать работу с объектом (в свободной форме).
+-->
+<script>
+  "use strict";
+
+  function ProductES5 (name_product, price) {
+    this.name_product = name_product;
+    this.price = price;
+  }
+
+  ProductES5.prototype.make25Discount = function () {
+    console.log(`Цена со скидкой 25% на ${this.name_product}, состовляет ${this.price *= 0.75} рублей`);
+  }
+
+  ProductES5.prototype.out_of_stock = function () {
+    console.log(`Тавара ${this.name_product} нет в наличии!`)
+  }
+
+  const product_1 = new ProductES5('Молоко', 60);
+  console.log(product_1);
+  console.log(product_1.make25Discount());
+  console.log(product_1.out_of_stock());
+
+  const product_2 = new ProductES5('Хлеб', 55);
+  console.log(product_2)
+  console.log(product_2.make25Discount())
+  console.log(product_2.out_of_stock())
+
+
+class ProductES6 {
+  constructor(name_product, price) {
+    this.name_product = name_product;
+    this.price = price
+  }
+
+  make25Discount () {
+    console.log(`Цена со скидкой 25% на ${this.name_product}, состовляет ${this.price *= 0.75} рублей`);
+  }
+
+  out_of_stock () {
+    console.log(`Тавара ${this.name_product} нет в наличии!`)
+  }
+}
+
+const product_3 = new ProductES6('Сыр', 120);
+const product_4 = new ProductES6('Рис', 90);
+
+console.log(product_3)
+console.log(product_3.make25Discount())
+console.log(product_3.out_of_stock())
+console.log(product_4)
+console.log(product_4.make25Discount())
+console.log(product_4.out_of_stock())
+
+</script>
+</body>
+</html>
